@@ -1,0 +1,389 @@
+/* Diagram CSS for workflow editor */
+
+/* Canvas tools */
+.canvas-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.zoom-controls, .canvas-tools {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.zoom-controls button, .canvas-tools button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.zoom-controls button:hover, .canvas-tools button:hover {
+  background-color: var(--border-color);
+}
+
+.canvas-tools button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+#zoom-level {
+  width: 50px;
+  text-align: center;
+}
+
+/* Diagram Canvas */
+.diagram-canvas {
+  position: relative;
+  height: calc(100vh - 220px);
+  overflow: auto;
+  background-color: var(--background-color);
+}
+
+.diagram-grid {
+  position: relative;
+  width: 3000px;
+  height: 1500px;
+  background-size: 10px 10px;
+  background-image: 
+    linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
+}
+
+.diagram-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
+  pointer-events: none;
+}
+
+.dark-mode .diagram-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.dark-mode .diagram-grid::before {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Node Styles */
+.workflow-node {
+  position: absolute;
+  min-width: 100px;
+  border-radius: 8px;
+  background-color: white;
+  border: 2px solid #38bdf8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  cursor: move;
+  user-select: none;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dark-mode .workflow-node {
+  background-color: #1e293b;
+  border-color: #0ea5e9;
+}
+
+.workflow-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.workflow-node.dragging {
+  opacity: 0.7;
+  z-index: 1000;
+}
+
+/* Node Types */
+.start-node {
+  left: 30px;
+  top: 30px;
+  background-color: #10b981;
+  border-color: #059669;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .start-node {
+  background-color: #059669;
+  border-color: #10b981;
+}
+
+.end-node {
+  background-color: #ef4444;
+  border-color: #dc2626;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .end-node {
+  background-color: #dc2626;
+  border-color: #ef4444;
+}
+
+.action-node {
+  padding: 10px;
+  background-color: #38bdf8;
+  border-color: #0ea5e9;
+  color: white;
+}
+
+.dark-mode .action-node {
+  background-color: #0ea5e9;
+  border-color: #0284c7;
+}
+
+.decision-node {
+  background-color: #a78bfa;
+  border-color: #8b5cf6;
+  color: white;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark-mode .decision-node {
+  background-color: #8b5cf6;
+  border-color: #7c3aed;
+}
+
+/* Node Content */
+.node-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+}
+
+.node-icon {
+  font-size: 16px;
+}
+
+.node-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Node anchor points (connection points) */
+.node-anchor {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border: 2px solid #38bdf8;
+  border-radius: 50%;
+  z-index: 11;
+}
+
+.dark-mode .node-anchor {
+  background-color: #1e293b;
+  border-color: #0ea5e9;
+}
+
+.input-anchor {
+  top: 50%;
+  left: -6px;
+  transform: translateY(-50%);
+}
+
+.output-anchor {
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+}
+
+.start-node .input-anchor {
+  display: none;
+}
+
+.end-node .output-anchor {
+  display: none;
+}
+
+/* Alternative output for decision nodes */
+.alt-output {
+  bottom: -6px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+/* Node actions */
+.node-actions {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.workflow-node:hover .node-actions {
+  opacity: 1;
+}
+
+.node-actions button {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .node-actions button {
+  background-color: #1e293b;
+}
+
+.node-actions button:hover {
+  transform: scale(1.1);
+}
+
+.node-actions button.edit-node:hover {
+  color: var(--primary-color);
+}
+
+.node-actions button.delete-node:hover {
+  color: var(--error-color);
+}
+
+/* Connection lines */
+.connections-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.connection {
+  fill: none;
+  stroke: #38bdf8;
+  stroke-width: 2px;
+  stroke-dasharray: 5, 5;
+  animation: dash-animation 20s linear infinite;
+  pointer-events: none;
+}
+
+.dark-mode .connection {
+  stroke: #0ea5e9;
+}
+
+.success-path {
+  stroke: #10b981;
+  stroke-dasharray: none;
+}
+
+.dark-mode .success-path {
+  stroke: #059669;
+}
+
+.alt-path {
+  stroke: #f59e0b;
+  stroke-dasharray: 5, 5;
+}
+
+.dark-mode .alt-path {
+  stroke: #d97706;
+}
+
+.temp-connection {
+  stroke: #a1a1aa;
+  stroke-dasharray: 3, 3;
+  stroke-width: 1.5px;
+}
+
+@keyframes dash-animation {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Mini map */
+.mini-map {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  height: 100px;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  z-index: 100;
+  overflow: hidden;
+  display: none; /* Hidden for now, can enable later */
+}
+
+.mini-map-viewport {
+  position: absolute;
+  border: 1px solid var(--primary-color);
+  background-color: rgba(26, 86, 219, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .diagram-canvas {
+    height: calc(100vh - 280px);
+  }
+  
+  .canvas-toolbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .workflow-node {
+    min-width: 80px;
+  }
+  
+  .node-label {
+    font-size: 10px;
+  }
+}

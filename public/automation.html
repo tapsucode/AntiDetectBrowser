@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidemium - Tự động hóa</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/automation.css">
+  <link rel="stylesheet" href="css/diagram.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="images/logo.svg" alt="Hidemium">
+        <h1>hidemium</h1>
+      </div>
+      
+      <div class="add-profile-btn">
+        <button id="add-profile-button">
+          <i class="fas fa-plus"></i> Thêm hồ sơ
+        </button>
+      </div>
+      
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item" data-view="profiles">
+            <i class="fas fa-user-circle"></i> Hồ sơ
+          </li>
+          <li class="nav-item" data-view="network">
+            <i class="fas fa-network-wired"></i> Mạng
+          </li>
+          <li class="nav-item active" data-view="automation">
+            <i class="fas fa-robot"></i> Tự động hóa
+          </li>
+          <li class="nav-item" data-view="settings">
+            <i class="fas fa-cog"></i> Cài đặt
+          </li>
+          <li class="nav-item" data-view="documentation">
+            <i class="fas fa-book"></i> Tài liệu
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="ai-assistant">
+          <div class="ai-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="ai-text">
+            <span>HIDEMIUM AI</span>
+            <span class="ai-badge">beta</span>
+          </div>
+        </div>
+        
+        <div class="common-section">
+          <div class="common-header">COMMON</div>
+          <div class="usage-stat">
+            <span>Đang 1000 profiles</span>
+            <div class="usage-bar">
+              <div class="usage-progress" style="width: 70%;"></div>
+            </div>
+          </div>
+          
+          <div class="stats-container">
+            <div class="stat-item">
+              <div class="stat-name">Hồ sơ máy tính</div>
+              <div class="stat-value">0/5</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Hồ sơ cục bộ</div>
+              <div class="stat-value">0/0</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Thành viên nhóm</div>
+              <div class="stat-value">0/0</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Phiên đăng nhập</div>
+              <div class="stat-value">1/1</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Giới hạn tương tác</div>
+              <div class="stat-value">0/10</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Hết hạn vào</div>
+              <div class="stat-value">2026-04-29</div>
+            </div>
+          </div>
+          
+          <div class="upgrade-button">
+            <button id="upgrade-btn">
+              <i class="fas fa-arrow-up"></i> Nâng cấp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="view-title">
+          <h2>Tự động hóa</h2>
+        </div>
+        
+        <div class="header-actions">
+          <div class="language-selector">
+            <img src="images/vi-flag.svg" alt="Vietnamese" class="flag-icon">
+            <span>VI</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          
+          <div class="theme-toggle">
+            <input type="checkbox" id="theme-switch">
+            <label for="theme-switch" class="switch"></label>
+          </div>
+          
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          
+          <div class="user-profile">
+            <span class="user-initial">V</span>
+            <div class="user-details">
+              <span class="user-name">Văn Anh</span> 
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="user-menu hidden">
+              <ul>
+                <li><i class="fas fa-user"></i> Tài khoản</li>
+                <li><i class="fas fa-credit-card"></i> Thanh toán</li>
+                <li id="logout-button"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Workflow Builder Area -->
+      <div class="content-area">
+        <div class="action-toolbar">
+          <button class="primary-btn" id="new-workflow-btn">
+            <i class="fas fa-plus"></i> Tạo workflow mới
+          </button>
+          
+          <div class="workflow-selector-container">
+            <div class="workflow-selector">
+              <div class="selected-workflow">
+                <span>Login Automation</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="workflow-dropdown hidden">
+                <div class="workflow-dropdown-item active">
+                  <div class="dropdown-workflow-name">Login Automation</div>
+                  <div class="dropdown-workflow-status success">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                </div>
+                <div class="workflow-dropdown-item add-new">
+                  <i class="fas fa-plus"></i> Thêm workflow
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="zoom-controls">
+            <button class="zoom-btn" id="zoom-out">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <span id="zoom-level">100%</span>
+            <button class="zoom-btn" id="zoom-in">
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="workflows-container">
+          
+          <div class="workflow-builder">
+            <div class="builder-header">
+              <div class="workflow-info">
+                <input type="text" id="workflow-name" placeholder="Tên workflow" value="Login Automation">
+                <div class="profile-selector">
+                  <span>Profile:</span>
+                  <select id="workflow-profile">
+                    <option value="1">Marketing Profile</option>
+                    <option value="2">Social Media</option>
+                    <option value="add-new">+ Thêm profile mới</option>
+                  </select>
+                </div>
+              </div>
+              <div class="builder-actions">
+                <button class="secondary-btn" id="test-workflow">
+                  <i class="fas fa-vial"></i> Test
+                </button>
+                <button class="primary-btn" id="save-workflow">
+                  <i class="fas fa-save"></i> Lưu
+                </button>
+              </div>
+            </div>
+            
+            <div class="builder-content">
+              <div class="steps-sidebar">
+                <div class="steps-categories">
+                  <div class="step-category active">
+                    <div class="category-name">Cơ bản</div>
+                  </div>
+                  <div class="step-category">
+                    <div class="category-name">Tương tác</div>
+                  </div>
+                  <div class="step-category">
+                    <div class="category-name">Scraping</div>
+                  </div>
+                </div>
+                
+                <div class="available-steps">
+                  <div class="step-block" draggable="true" data-step-type="navigate">
+                    <i class="fas fa-globe"></i>
+                    <span>Điều hướng</span>
+                  </div>
+                  <div class="step-block" draggable="true" data-step-type="click">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <span>Click</span>
+                  </div>
+                  <div class="step-block" draggable="true" data-step-type="type">
+                    <i class="fas fa-keyboard"></i>
+                    <span>Nhập văn bản</span>
+                  </div>
+                  <div class="step-block" draggable="true" data-step-type="wait">
+                    <i class="fas fa-clock"></i>
+                    <span>Chờ đợi</span>
+                  </div>
+                  <div class="step-block" draggable="true" data-step-type="screenshot">
+                    <i class="fas fa-camera"></i>
+                    <span>Chụp màn hình</span>
+                  </div>
+                  <div class="step-block" draggable="true" data-step-type="extract">
+                    <i class="fas fa-copy"></i>
+                    <span>Trích xuất dữ liệu</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="workflow-canvas">
+                <!-- Canvas toolbar -->
+                <div class="canvas-toolbar">
+                  <div class="zoom-controls">
+                    <button id="zoom-out" title="Thu nhỏ"><i class="fas fa-search-minus"></i></button>
+                    <div id="zoom-level">100%</div>
+                    <button id="zoom-in" title="Phóng to"><i class="fas fa-search-plus"></i></button>
+                  </div>
+                  <div class="canvas-tools">
+                    <button id="show-grid-toggle" class="active" title="Hiện/ẩn lưới"><i class="fas fa-th"></i></button>
+                    <button id="auto-arrange" title="Tự động sắp xếp"><i class="fas fa-magic"></i></button>
+                    <button id="center-view" title="Căn giữa khung nhìn"><i class="fas fa-crosshairs"></i></button>
+                  </div>
+                </div>
+                
+                <!-- Main canvas area -->
+                <div class="diagram-canvas">
+                  <div class="diagram-grid" id="diagram-grid">
+                    <!-- SVG layer for connections -->
+                    <svg class="connections-layer">
+                      <!-- All connections are defined here -->
+                      <path class="connection" data-output-node="start" data-input-node="1" d="M 60,40 C 120,40 140,80 200,80"></path>
+                      <path class="connection" data-output-node="1" data-input-node="2" d="M 300,80 L 400,80"></path>
+                      <path class="connection" data-output-node="2" data-input-node="3" d="M 500,80 L 600,80"></path>
+                      <path class="connection" data-output-node="3" data-input-node="4" d="M 700,80 C 730,80 730,140 730,200"></path>
+                      <path class="connection success-path" data-output-node="4" data-input-node="end" d="M 770,200 C 810,200 860,160 900,80"></path>
+                      <path class="connection alt-path" data-output-node="4" data-input-node="2" d="M 730,240 C 730,280 400,280 400,120 L 400,80"></path>
+                    </svg>
+                    
+                    <!-- Start node -->
+                    <div class="workflow-node start-node" data-node-id="start" data-node-type="start">
+                      <div class="node-content">
+                        <div class="node-icon"><i class="fas fa-play"></i></div>
+                        <div class="node-label">Start</div>
+                      </div>
+                      <!-- Node anchor point for output connections -->
+                      <div class="node-anchor output-anchor" data-anchor-type="output"></div>
+                    </div>
+                    
+                    <!-- Navigate node -->
+                    <div class="workflow-node action-node" data-node-id="1" data-node-type="navigate" style="left: 200px; top: 80px;">
+                      <div class="node-content">
+                        <div class="node-icon"><i class="fas fa-globe"></i></div>
+                        <div class="node-label">Điều hướng</div>
+                      </div>
+                      <!-- Node anchor points -->
+                      <div class="node-anchor input-anchor" data-anchor-type="input"></div>
+                      <div class="node-anchor output-anchor" data-anchor-type="output"></div>
+                      <!-- Node actions -->
+                      <div class="node-actions">
+                        <button class="edit-node"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="delete-node"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </div>
+                    
+                    <!-- Type username node -->
+                    <div class="workflow-node action-node" data-node-id="2" data-node-type="type" style="left: 400px; top: 80px;">
+                      <div class="node-content">
+                        <div class="node-icon"><i class="fas fa-keyboard"></i></div>
+                        <div class="node-label">Nhập văn bản</div>
+                      </div>
+                      <!-- Node anchor points -->
+                      <div class="node-anchor input-anchor" data-anchor-type="input"></div>
+                      <div class="node-anchor output-anchor" data-anchor-type="output"></div>
+                      <!-- Node actions -->
+                      <div class="node-actions">
+                        <button class="edit-node"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="delete-node"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </div>
+                    
+                    <!-- Type password node -->
+                    <div class="workflow-node action-node" data-node-id="3" data-node-type="type" style="left: 600px; top: 80px;">
+                      <div class="node-content">
+                        <div class="node-icon"><i class="fas fa-keyboard"></i></div>
+                        <div class="node-label">Nhập văn bản</div>
+                      </div>
+                      <!-- Node anchor points -->
+                      <div class="node-anchor input-anchor" data-anchor-type="input"></div>
+                      <div class="node-anchor output-anchor" data-anchor-type="output"></div>
+                      <!-- Node actions -->
+                      <div class="node-actions">
+                        <button class="edit-node"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="delete-node"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </div>
+                    
+                    <!-- Decision node -->
+                    <div class="workflow-node decision-node" data-node-id="4" data-node-type="loop" style="left: 730px; top: 200px;">
+                      <div class="node-content">
+                        <div class="node-icon"><i class="fas fa-sync"></i></div>
+                        <div class="node-label">Loop</div>
+                      </div>
+                      <!-- Node anchor points -->
+                      <div class="node-anchor input-anchor" data-anchor-type="input"></div>
+                      <div class="node-anchor output-anchor" data-anchor-type="output-true"></div>
+                      <div class="node-anchor output-anchor alt-output" data-anchor-type="output-false"></div>
+                      <!-- Node actions -->
+                      <div class="node-actions">
+                        <button class="edit-node"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="delete-node"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </div>
+                    
+                    <!-- End node -->
+                    <div class="workflow-node end-node" data-node-id="end" data-node-type="end" style="left: 900px; top: 80px;">
+                      <div class="node-content">
+                        <div class="node-icon"><i class="fas fa-stop"></i></div>
+                        <div class="node-label">Stop</div>
+                      </div>
+                      <!-- Node anchor point for input connections -->
+                      <div class="node-anchor input-anchor" data-anchor-type="input"></div>
+                    </div>
+                    
+                    <!-- No connections here anymore, moved to top -->
+                  </div>
+                </div>
+                
+                <!-- Mini map (optional) -->
+                <div class="mini-map">
+                  <div class="mini-map-viewport"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modals -->
+  <div class="modal-container hidden" id="step-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="step-modal-title">Chỉnh sửa bước</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="step-modal-body">
+        <!-- Dynamic content will be loaded here based on step type -->
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" id="cancel-step">Hủy</button>
+        <button class="primary-btn" id="save-step">Lưu</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-container hidden" id="confirm-modal">
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="modal-header">
+        <h3>Xác nhận</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-message">Bạn có chắc chắn muốn xóa bước này?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" id="cancel-confirm">Hủy</button>
+        <button class="primary-btn danger-btn" id="confirm-action">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/app.js"></script>
+  <script src="js/automation.js"></script>
+  <script src="js/diagram.js"></script>
+</body>
+</html>

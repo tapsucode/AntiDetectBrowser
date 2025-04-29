@@ -1,0 +1,33 @@
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["glib", "xorg.libX11", "xorg.libxcb", "nss", "nspr", "gtk3", "atk", "pango", "cairo", "mesa", "libdrm", "libxkbcommon", "alsa-lib"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "WebServer"
+
+[[workflows.workflow]]
+name = "WebServer"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node server.js"
+waitForPort = 5000
+
+[deployment]
+run = ["sh", "-c", "npm install && npm start"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80

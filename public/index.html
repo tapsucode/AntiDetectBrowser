@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidemium - Anti-Detect Browser</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="images/logo.svg" alt="Hidemium">
+        <h1>hidemium</h1>
+      </div>
+      
+      <div class="add-profile-btn">
+        <button id="add-profile-button">
+          <i class="fas fa-plus"></i> Thêm hồ sơ
+        </button>
+      </div>
+      
+      <nav class="nav-menu">
+        <ul>
+          <li class="nav-item active" data-view="profiles">
+            <i class="fas fa-user-circle"></i> Hồ sơ
+          </li>
+          <li class="nav-item" data-view="network">
+            <i class="fas fa-network-wired"></i> Mạng
+          </li>
+          <li class="nav-item" data-view="automation">
+            <a href="/automation" style="color: inherit; text-decoration: none;">
+              <i class="fas fa-robot"></i> Tự động hóa
+            </a>
+          </li>
+          <li class="nav-item" data-view="settings">
+            <i class="fas fa-cog"></i> Cài đặt
+          </li>
+          <li class="nav-item" data-view="documentation">
+            <i class="fas fa-book"></i> Tài liệu
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="ai-assistant">
+          <div class="ai-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="ai-text">
+            <span>HIDEMIUM AI</span>
+            <span class="ai-badge">beta</span>
+          </div>
+        </div>
+        
+        <div class="common-section">
+          <div class="common-header">COMMON</div>
+          <div class="usage-stat">
+            <span>Đang 1000 profiles</span>
+            <div class="usage-bar">
+              <div class="usage-progress" style="width: 70%;"></div>
+            </div>
+          </div>
+          
+          <div class="stats-container">
+            <div class="stat-item">
+              <div class="stat-name">Hồ sơ máy tính</div>
+              <div class="stat-value">0/5</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Hồ sơ cục bộ</div>
+              <div class="stat-value">0/0</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Thành viên nhóm</div>
+              <div class="stat-value">0/0</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Phiên đăng nhập</div>
+              <div class="stat-value">1/1</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Giới hạn tương tác</div>
+              <div class="stat-value">0/10</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">Hết hạn vào</div>
+              <div class="stat-value">2026-04-29</div>
+            </div>
+          </div>
+          
+          <div class="upgrade-button">
+            <button id="upgrade-btn">
+              <i class="fas fa-arrow-up"></i> Nâng cấp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="view-title">
+          <h2>Hồ sơ</h2>
+        </div>
+        
+        <div class="header-actions">
+          <div class="language-selector">
+            <img src="images/vi-flag.svg" alt="Vietnamese" class="flag-icon">
+            <span>VI</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          
+          <div class="theme-toggle">
+            <input type="checkbox" id="theme-switch">
+            <label for="theme-switch" class="switch"></label>
+          </div>
+          
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          
+          <div class="user-profile">
+            <span class="user-initial">V</span>
+            <div class="user-details">
+              <span class="user-name">Văn Anh</span> 
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="user-menu hidden">
+              <ul>
+                <li><i class="fas fa-user"></i> Tài khoản</li>
+                <li><i class="fas fa-credit-card"></i> Thanh toán</li>
+                <li id="logout-button"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Tabs, filters and content sections -->
+      <div class="content-area">
+        <!-- View Tabs -->
+        <div class="view-tabs">
+          <div class="tab active" data-tab="cloud">
+            <i class="fas fa-cloud"></i> Cloud
+            <span class="tab-count">0</span>
+          </div>
+          <div class="tab" data-tab="local">
+            <i class="fas fa-desktop"></i> Thư mục
+            <span class="tab-count">0</span>
+          </div>
+          <div class="tab" data-tab="shared">
+            <i class="fas fa-share-alt"></i> Chia sẻ với tôi
+            <span class="tab-count">0</span>
+          </div>
+        </div>
+        
+        <!-- Action Toolbar -->
+        <div class="action-toolbar">
+          <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Tìm kiếm theo tên">
+          </div>
+          
+          <div class="toolbar-actions">
+            <button class="toolbar-btn">
+              <i class="fas fa-tag"></i> Gắn nhãn nhóm
+            </button>
+            <button class="toolbar-btn">
+              <i class="fas fa-sort"></i> Tạo nhóm
+            </button>
+            <button class="toolbar-btn">
+              <i class="fas fa-redo-alt"></i> Khởi tạo lại hồ sơ
+            </button>
+          </div>
+        </div>
+        
+        <!-- Profiles Table -->
+        <div class="profiles-table">
+          <div class="table-header">
+            <div class="table-cell checkbox-cell">
+              <input type="checkbox" id="select-all">
+            </div>
+            <div class="table-cell name-cell">Tên</div>
+            <div class="table-cell tags-cell">Thẻ</div>
+            <div class="table-cell notes-cell">Ghi chú</div>
+            <div class="table-cell proxy-cell">Mạng</div>
+            <div class="table-cell sessions-cell">Mở lần cuối</div>
+            <div class="table-cell status-cell">Trạng thái</div>
+            <div class="table-cell actions-cell">Tin nhắn</div>
+          </div>
+          
+          <div class="no-data">
+            <div class="no-data-icon">
+              <i class="fas fa-inbox"></i>
+            </div>
+            <div class="no-data-message">No data</div>
+          </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+          <div class="page-info">Hồ sơ: 0</div>
+          <div class="page-controls">
+            <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+            <span class="page-numbers">1</span>
+            <button class="page-btn" disabled><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="page-size">
+            <span>10</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modals -->
+  <div class="modal-container hidden" id="profile-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Thêm hồ sơ mới</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="profile-form">
+          <div class="form-group">
+            <label for="profile-name">Tên hồ sơ</label>
+            <input type="text" id="profile-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="profile-tags">Thẻ</label>
+            <input type="text" id="profile-tags" placeholder="Nhập và nhấn Enter để thêm thẻ">
+            <div class="tags-container"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="profile-proxy">Proxy</label>
+            <select id="profile-proxy">
+              <option value="">No proxy</option>
+              <option value="add-new">+ Thêm proxy mới</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="profile-os">Hệ điều hành</label>
+            <select id="profile-os">
+              <option value="windows">Windows</option>
+              <option value="macos">MacOS</option>
+              <option value="linux">Linux</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="profile-browser">Trình duyệt</label>
+            <select id="profile-browser">
+              <option value="chrome">Chrome</option>
+              <option value="firefox">Firefox</option>
+              <option value="safari">Safari</option>
+              <option value="edge">Edge</option>
+            </select>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="profile-language">Ngôn ngữ</label>
+              <select id="profile-language">
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+              </select>
+            </div>
+            
+            <div class="form-group half">
+              <label for="profile-timezone">Múi giờ</label>
+              <select id="profile-timezone">
+                <option value="asia/ho_chi_minh">Asia/Ho_Chi_Minh (GMT+7)</option>
+                <option value="asia/bangkok">Asia/Bangkok (GMT+7)</option>
+                <option value="america/new_york">America/New_York (GMT-4)</option>
+                <option value="europe/london">Europe/London (GMT+1)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="profile-notes">Ghi chú</label>
+            <textarea id="profile-notes" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" id="cancel-profile">Hủy</button>
+        <button class="primary-btn" id="save-profile">Lưu</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/app.js"></script>
+</body>
+</html>

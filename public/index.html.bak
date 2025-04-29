@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AntiDetect Browser</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="images/logo.svg" alt="AntiDetect Browser">
+        <h1>AntiDetect</h1>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li class="active"><a href="#" data-view="dashboard"><span class="icon">📊</span> Dashboard</a></li>
+          <li><a href="#" data-view="profiles"><span class="icon">👤</span> Profiles</a></li>
+          <li><a href="#" data-view="proxies"><span class="icon">🔒</span> Proxies</a></li>
+          <li><a href="#" data-view="automation"><span class="icon">⚙️</span> Automation</a></li>
+          <li><a href="#" data-view="settings"><span class="icon">🔧</span> Settings</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="theme-toggle">
+          <span class="light-mode">☀️</span>
+          <label class="switch">
+            <input type="checkbox" id="theme-switch">
+            <span class="slider round"></span>
+          </label>
+          <span class="dark-mode">🌙</span>
+        </div>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="top-bar">
+        <div class="search-bar">
+          <input type="text" placeholder="Search...">
+          <button type="button">🔍</button>
+        </div>
+        <div class="user-menu">
+          <span class="notification-icon">🔔</span>
+          <div class="user-profile">
+            <img src="images/avatar.svg" alt="User">
+            <span>Admin</span>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Dashboard View -->
+      <section class="view-container" id="dashboard-view">
+        <div class="section-header">
+          <h2>Dashboard</h2>
+          <p>Overview of your browser profiles and activity</p>
+        </div>
+        
+        <div class="stats-container">
+          <div class="stat-card">
+            <h3>Active Profiles</h3>
+            <p class="stat-value" id="active-profiles-count">0</p>
+            <p class="stat-change positive">+2 this week</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Profiles</h3>
+            <p class="stat-value" id="total-profiles-count">0</p>
+            <p class="stat-change positive">+5 this month</p>
+          </div>
+          <div class="stat-card">
+            <h3>Working Proxies</h3>
+            <p class="stat-value" id="working-proxies-count">0</p>
+            <p class="stat-change neutral">No change</p>
+          </div>
+          <div class="stat-card">
+            <h3>Completed Workflows</h3>
+            <p class="stat-value" id="completed-workflows-count">0</p>
+            <p class="stat-change positive">+12 this month</p>
+          </div>
+        </div>
+        
+        <div class="charts-container">
+          <div class="chart-card">
+            <h3>Profile Activity</h3>
+            <div class="chart-placeholder">Activity Chart</div>
+          </div>
+          <div class="chart-card">
+            <h3>Browser Usage</h3>
+            <div class="chart-placeholder">Usage Chart</div>
+          </div>
+        </div>
+        
+        <div class="recent-activity">
+          <div class="section-header">
+            <h3>Recent Activity</h3>
+            <button class="view-all-btn">View All</button>
+          </div>
+          <div class="activity-list" id="recent-activity-list">
+            <p class="empty-state">Loading recent activity...</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Profiles View -->
+      <section class="view-container hidden" id="profiles-view">
+        <div class="section-header">
+          <h2>Browser Profiles</h2>
+          <p>Manage your browser fingerprints and profiles</p>
+        </div>
+        
+        <div class="action-bar">
+          <button class="primary-btn" id="create-profile-btn">Create New Profile</button>
+          <div class="filter-group">
+            <select id="profile-filter">
+              <option value="all">All Profiles</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            <button class="icon-btn">🔄</button>
+          </div>
+        </div>
+        
+        <div class="profiles-grid" id="profiles-container">
+          <p class="empty-state">Loading profiles...</p>
+        </div>
+        
+        <!-- Profile Form Modal -->
+        <div class="modal" id="profile-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 id="profile-modal-title">Create New Profile</h3>
+              <button class="close-btn">&times;</button>
+            </div>
+            <form id="profile-form">
+              <div class="form-group">
+                <label for="profile-name">Profile Name</label>
+                <input type="text" id="profile-name" required>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-platform">Platform</label>
+                  <select id="profile-platform">
+                    <option value="windows">Windows</option>
+                    <option value="macos">macOS</option>
+                    <option value="linux">Linux</option>
+                    <option value="android">Android</option>
+                    <option value="ios">iOS</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="profile-resolution">Screen Resolution</label>
+                  <select id="profile-resolution">
+                    <option value="1920x1080">1920x1080 (FHD)</option>
+                    <option value="2560x1440">2560x1440 (QHD)</option>
+                    <option value="3840x2160">3840x2160 (4K)</option>
+                    <option value="1366x768">1366x768</option>
+                    <option value="1440x900">1440x900</option>
+                    <option value="360x640">360x640 (Mobile)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-language">Language</label>
+                  <select id="profile-language">
+                    <option value="en-US">English (US)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="es-ES">Spanish</option>
+                    <option value="fr-FR">French</option>
+                    <option value="de-DE">German</option>
+                    <option value="zh-CN">Chinese (Simplified)</option>
+                    <option value="ja-JP">Japanese</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="profile-timezone">Timezone</label>
+                  <select id="profile-timezone">
+                    <option value="UTC">UTC</option>
+                    <option value="America/New_York">America/New_York</option>
+                    <option value="America/Los_Angeles">America/Los_Angeles</option>
+                    <option value="Europe/London">Europe/London</option>
+                    <option value="Europe/Paris">Europe/Paris</option>
+                    <option value="Asia/Tokyo">Asia/Tokyo</option>
+                    <option value="Asia/Shanghai">Asia/Shanghai</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="profile-user-agent">User Agent</label>
+                <input type="text" id="profile-user-agent" placeholder="Leave blank for automatic">
+              </div>
+              
+              <div class="form-group">
+                <label for="profile-proxy">Proxy</label>
+                <select id="profile-proxy">
+                  <option value="">No Proxy</option>
+                </select>
+              </div>
+              
+              <h4>Fingerprint Protection</h4>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="profile-webrtc">WebRTC</label>
+                  <select id="profile-webrtc">
+                    <option value="real">Real (No Protection)</option>
+                    <option value="fake">Fake (Spoofed IP)</option>
+                    <option value="disabled">Disabled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="profile-canvas">Canvas</label>
+                  <select id="profile-canvas">
+                    <option value="real">Real (No Protection)</option>
+                    <option value="noise">Noise (Add Noise)</option>
+                    <option value="block">Block (Prevent Access)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="profile-webgl">WebGL</label>
+                <select id="profile-webgl">
+                  <option value="real">Real (No Protection)</option>
+                  <option value="noise">Noise (Add Noise)</option>
+                  <option value="block">Block (Prevent Access)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="profile-notes">Notes</label>
+                <textarea id="profile-notes" rows="3"></textarea>
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="secondary-btn" id="cancel-profile-btn">Cancel</button>
+                <button type="submit" class="primary-btn" id="save-profile-btn">Save Profile</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Proxies View -->
+      <section class="view-container hidden" id="proxies-view">
+        <div class="section-header">
+          <h2>Proxy Manager</h2>
+          <p>Manage your proxies for anonymous browsing</p>
+        </div>
+        
+        <div class="action-bar">
+          <button class="primary-btn" id="add-proxy-btn">Add New Proxy</button>
+          <div class="filter-group">
+            <select id="proxy-filter">
+              <option value="all">All Proxies</option>
+              <option value="working">Working</option>
+              <option value="error">Error</option>
+              <option value="not_tested">Not Tested</option>
+            </select>
+            <button class="icon-btn" id="refresh-proxies-btn">🔄</button>
+          </div>
+        </div>
+        
+        <div class="proxies-list" id="proxies-container">
+          <p class="empty-state">Loading proxies...</p>
+        </div>
+        
+        <!-- Proxy Form Modal -->
+        <div class="modal" id="proxy-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 id="proxy-modal-title">Add New Proxy</h3>
+              <button class="close-btn">&times;</button>
+            </div>
+            <form id="proxy-form">
+              <div class="form-group">
+                <label for="proxy-name">Proxy Name</label>
+                <input type="text" id="proxy-name" required>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="proxy-type">Type</label>
+                  <select id="proxy-type">
+                    <option value="http">HTTP</option>
+                    <option value="https">HTTPS</option>
+                    <option value="socks4">SOCKS4</option>
+                    <option value="socks5">SOCKS5</option>
+                    <option value="ssl">SSL/TLS</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="proxy-host">Host/IP</label>
+                  <input type="text" id="proxy-host" required>
+                </div>
+                <div class="form-group">
+                  <label for="proxy-port">Port</label>
+                  <input type="text" id="proxy-port" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="proxy-username">Username (Optional)</label>
+                  <input type="text" id="proxy-username">
+                </div>
+                <div class="form-group">
+                  <label for="proxy-password">Password (Optional)</label>
+                  <input type="password" id="proxy-password">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="proxy-country">Country (Optional)</label>
+                  <input type="text" id="proxy-country">
+                </div>
+                <div class="form-group">
+                  <label for="proxy-city">City (Optional)</label>
+                  <input type="text" id="proxy-city">
+                </div>
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="secondary-btn" id="cancel-proxy-btn">Cancel</button>
+                <button type="submit" class="primary-btn" id="save-proxy-btn">Save Proxy</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Automation View -->
+      <section class="view-container hidden" id="automation-view">
+        <div class="section-header">
+          <h2>Workflow Automation</h2>
+          <p>Create and manage automated workflows</p>
+        </div>
+        
+        <div class="action-bar">
+          <button class="primary-btn" id="create-workflow-btn">Create New Workflow</button>
+          <div class="filter-group">
+            <select id="workflow-filter">
+              <option value="all">All Workflows</option>
+              <option value="running">Running</option>
+              <option value="completed">Completed</option>
+              <option value="error">Error</option>
+              <option value="idle">Idle</option>
+            </select>
+            <button class="icon-btn" id="refresh-workflows-btn">🔄</button>
+          </div>
+        </div>
+        
+        <div class="workflows-list" id="workflows-container">
+          <p class="empty-state">Loading workflows...</p>
+        </div>
+        
+        <!-- Workflow Form Modal -->
+        <div class="modal" id="workflow-modal">
+          <div class="modal-content wide-modal">
+            <div class="modal-header">
+              <h3 id="workflow-modal-title">Create New Workflow</h3>
+              <button class="close-btn">&times;</button>
+            </div>
+            <form id="workflow-form">
+              <div class="form-group">
+                <label for="workflow-name">Workflow Name</label>
+                <input type="text" id="workflow-name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="workflow-description">Description</label>
+                <textarea id="workflow-description" rows="2"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label for="workflow-profile">Profile</label>
+                <select id="workflow-profile" required>
+                  <option value="">Select a profile</option>
+                </select>
+              </div>
+              
+              <h4>Workflow Steps</h4>
+              <div class="workflow-steps" id="workflow-steps-container">
+                <p class="empty-state">No steps added yet. Click "Add Step" to start building your workflow.</p>
+              </div>
+              
+              <div class="form-actions left-aligned">
+                <button type="button" class="secondary-btn" id="add-step-btn">Add Step</button>
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="secondary-btn" id="cancel-workflow-btn">Cancel</button>
+                <button type="submit" class="primary-btn" id="save-workflow-btn">Save Workflow</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Step Form Modal -->
+        <div class="modal" id="step-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 id="step-modal-title">Add Workflow Step</h3>
+              <button class="close-btn">&times;</button>
+            </div>
+            <form id="step-form">
+              <div class="form-group">
+                <label for="step-type">Step Type</label>
+                <select id="step-type" required>
+                  <option value="">Select step type</option>
+                  <option value="navigate">Navigate to URL</option>
+                  <option value="click">Click Element</option>
+                  <option value="type">Type Text</option>
+                  <option value="wait">Wait for Element</option>
+                  <option value="screenshot">Take Screenshot</option>
+                  <option value="extract">Extract Data</option>
+                  <option value="wait_time">Wait Time</option>
+                  <option value="javascript">Execute JavaScript</option>
+                </select>
+              </div>
+              
+              <div id="step-parameters-container">
+                <!-- Dynamic content based on step type -->
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="secondary-btn" id="cancel-step-btn">Cancel</button>
+                <button type="submit" class="primary-btn" id="save-step-btn">Add Step</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Settings View -->
+      <section class="view-container hidden" id="settings-view">
+        <div class="section-header">
+          <h2>Settings</h2>
+          <p>Configure application settings and preferences</p>
+        </div>
+        
+        <div class="settings-container">
+          <form id="settings-form">
+            <div class="settings-section">
+              <h3>Application Settings</h3>
+              
+              <div class="form-group">
+                <label for="setting-theme">Theme</label>
+                <select id="setting-theme">
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                  <option value="system">System Default</option>
+                </select>
+              </div>
+              
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="setting-startup">
+                <label for="setting-startup">Launch on system startup</label>
+              </div>
+              
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="setting-notifications">
+                <label for="setting-notifications">Enable desktop notifications</label>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3>Browser Settings</h3>
+              
+              <div class="form-group">
+                <label for="setting-engine">Default Browser Engine</label>
+                <select id="setting-engine">
+                  <option value="chromium">Chromium</option>
+                  <option value="firefox">Firefox</option>
+                  <option value="webkit">WebKit</option>
+                </select>
+              </div>
+              
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="setting-cookies">
+                <label for="setting-cookies">Clear cookies when closing profiles</label>
+              </div>
+              
+              <div class="form-group">
+                <label for="setting-blocked-domains">Blocked Domains</label>
+                <textarea id="setting-blocked-domains" rows="3" placeholder="Enter domains to block, one per line"></textarea>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3>Fingerprinting Protection</h3>
+              
+              <div class="form-group">
+                <label for="setting-protection-level">Default Protection Level</label>
+                <select id="setting-protection-level">
+                  <option value="low">Low - Basic Protection</option>
+                  <option value="medium">Medium - Standard Protection</option>
+                  <option value="high">High - Maximum Protection</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="danger-btn" id="reset-settings-btn">Reset to Default</button>
+              <button type="submit" class="primary-btn" id="save-settings-btn">Save Settings</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <div class="toast-container" id="toast-container"></div>
+  
+  <script src="js/app.js"></script>
+</body>
+</html>
